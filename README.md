@@ -8,6 +8,8 @@
 
 🔗 **[Acesse o app aqui](https://ml-metrics-calculator.streamlit.app)**
 
+![Preview do app](screenshots/app.png)
+
 Ferramenta feita em Python e Streamlit que recebe os resultados de um
 modelo (o que ele previu vs. o que era o valor real) e calcula as
 métricas de avaliação, mostrando também **o que cada número
