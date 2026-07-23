@@ -6,6 +6,8 @@
 ![Tests](https://img.shields.io/badge/tests-pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-informational?style=flat-square)
 
+🔗 **[Acesse o app aqui](https://ml-metrics-calculator.streamlit.app)**
+
 Ferramenta feita em Python e Streamlit que recebe os resultados de um
 modelo (o que ele previu vs. o que era o valor real) e calcula as
 métricas de avaliação, mostrando também **o que cada número
@@ -160,7 +162,3 @@ testes avisam antes de você descobrir isso com um número errado na tela.
 - [ ] Exportação do relatório em PDF ou Markdown
 - [ ] Aceitar múltiplos modelos no mesmo CSV para comparar lado a lado
 - [ ] Métricas por classe individual na multiclasse (além da média macro)
-
-## Link da aplicação
-
-[Acesse a aplicação publicada no Streamlit Community Cloud](#) *(link a preencher após o deploy)*
