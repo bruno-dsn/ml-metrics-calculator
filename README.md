@@ -1,166 +1,140 @@
-# Calculadora de Métricas de Machine Learning
+# Laboratório de Métricas de Machine Learning
 
-![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-pytest-0A9EDC?style=flat-square&logo=pytest&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-informational?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-aplicação-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-métricas-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
+![Altair](https://img.shields.io/badge/Altair-gráficos-1F77B4?style=for-the-badge)
+![Tests](https://img.shields.io/badge/testes-pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
+![License](https://img.shields.io/badge/licença-MIT-0F766E?style=for-the-badge)
 
-🔗 **[Acesse o app aqui](https://ml-metrics-calculator.streamlit.app)**
+[Acessar aplicação](https://ml-metrics-calculator.streamlit.app/)
 
-![Preview do app](screenshots/app.png)
+Aplicação educacional para interpretar métricas de classificação e regressão com contexto. O laboratório permite escolher a classe positiva, ajustar o limiar de decisão e observar como cada escolha altera os erros do modelo.
 
-Ferramenta feita em Python e Streamlit que recebe os resultados de um
-modelo (o que ele previu vs. o que era o valor real) e calcula as
-métricas de avaliação, mostrando também **o que cada número
-significa** e **quando ele pode te enganar**.
+![Visão do laboratório](assets/preview.png)
 
-Serve para três tipos de problema:
-- **Classificação binária** (2 classes, ex.: fraude / não-fraude)
-- **Classificação multiclasse** (3+ classes, ex.: gato / cachorro / pássaro)
-- **Regressão** (previsão de um número, ex.: preço de um imóvel)
+## Problema
 
-Além das métricas em si, a aplicação traduz os números em um
-**veredito automático**: uma caixa colorida (verde, amarela ou
-vermelha) que resume se o modelo está bom, precisa de atenção, ou tem
-desempenho fraco, incluindo para quais tipos de aplicação aquele
-perfil de resultado é adequado ou arriscado de usar.
+Acurácia alta não garante um modelo útil. Em uma base com evento raro, um classificador pode acertar a maioria e ainda ignorar quase todos os casos importantes.
 
----
+O projeto ajuda a responder:
 
-## Por que esse projeto existe
+1. Qual classe está sendo tratada como positiva?
+2. Quantos positivos reais o modelo encontrou?
+3. Quantos alertas positivos estavam corretos?
+4. Como o resultado muda quando o limiar é alterado?
+5. O desempenho está concentrado em uma classe?
+6. Os erros de regressão apresentam algum padrão?
 
-Muita gente (inclusive eu) decora a fórmula de precisão e recall, usa
-uma vez no curso e esquece. A ideia aqui não é só "calcular a conta". É entregar uma ferramenta que **avisa quando a métrica está mentindo**.
-Exemplo clássico: um dataset com 95% de exemplos da classe "não-fraude"
-pode ter um modelo com 95% de acurácia que **nunca detecta uma fraude
-de verdade**. A acurácia sozinha não mostra isso, o app avisa.
+## Funcionalidades
 
----
+### Classificação binária
 
-## Como rodar na sua máquina
+- escolha explícita da classe positiva;
+- limiar ajustável quando `y_proba` está presente;
+- acurácia balanceada, precisão, recall, especificidade e F1;
+- matriz de confusão;
+- ROC-AUC e PR-AUC;
+- curva de precisão, recall e F1 por limiar;
+- alerta de distribuição desbalanceada.
 
-```bash
-# 1. Entre na pasta do projeto
-cd ml-metrics-calculator
+### Classificação multiclasse
 
-# 2. (Recomendado) crie um ambiente virtual
-python3 -m venv .venv
-source .venv/bin/activate        # no Windows: .venv\Scripts\activate
-
-# 3. Instale as dependências
-pip install -r requirements.txt
-
-# 4. Rode o app
-streamlit run app.py
-```
-
-O Streamlit vai abrir automaticamente no navegador (normalmente em
-`http://localhost:8501`). Se não abrir, copie o endereço que aparece
-no terminal.
-
-Não tem um CSV de resultados de modelo à mão? Marque a caixinha
-**"Usar um CSV de exemplo"** na barra lateral: o app gera dados
-fictícios na hora, só para você ver a ferramenta funcionando.
-
----
-
-## Como preparar o seu CSV
-
-### Classificação (binária ou multiclasse)
-
-| y_real | y_previsto | y_proba (opcional, só binária) |
-|--------|------------|----------------------------------|
-| 1      | 1          | 0.91                              |
-| 0      | 1          | 0.55                              |
-| 1      | 0          | 0.32                              |
-
-- `y_real`: o valor verdadeiro (o gabarito)
-- `y_previsto`: a classe que o seu modelo previu
-- `y_proba`: **opcional**, só faz sentido em classificação binária.
-  É a probabilidade que o modelo deu para a classe positiva (o número
-  entre 0 e 1 que normalmente sai de `model.predict_proba()` no
-  scikit-learn). Com essa coluna, o app desenha a curva ROC e a curva
-  Precision-Recall.
+- acurácia e acurácia balanceada;
+- médias macro;
+- precisão, recall, F1 e suporte por classe;
+- matriz de confusão completa.
 
 ### Regressão
 
-| y_real | y_previsto |
-|--------|------------|
-| 105000 | 98500      |
-| 87000  | 91230      |
+- MAE, RMSE, R² e MAPE;
+- gráfico de valor real versus previsto;
+- análise visual dos resíduos.
 
-Tem exemplos prontos na pasta `sample_data/`, pode abrir um deles no
-Excel/Google Sheets para entender o formato antes de gerar o seu.
+## Mudança metodológica importante
 
----
+A aplicação não atribui mais um selo automático de modelo bom ou ruim. Limites fixos ignoram o custo de cada erro e o contexto de uso. A nova versão apresenta evidências e explica como interpretá-las.
 
-## O que cada métrica quer dizer (resumo rápido)
+## Formato do CSV
 
-**Classificação**
-- **Acurácia**: % de acertos no total. Enganosa em dados desbalanceados.
-- **Precisão**: das vezes que o modelo disse "positivo", quantas vezes
-  estava certo. Precisão baixa = muitos falsos alarmes.
-- **Recall**: dos casos positivos reais, quantos o modelo encontrou.
-  Recall baixo = o modelo deixa passar casos importantes.
-- **F1-score**: uma média entre precisão e recall, útil quando você
-  quer um número só.
+Classificação:
 
-**Regressão**
-- **MAE**: erro médio, em média o quanto a previsão erra (fácil de explicar).
-- **RMSE**: parecido com o MAE, mas pune mais os erros grandes.
-- **R²**: de 0 a 1 (pode ser negativo), diz o quanto o modelo explica
-  a variação dos dados comparado a "só chutar a média".
-
-O app explica cada uma dessas, calculada com os SEUS números, direto
-na tela, vale mais a pena ler ali do que só aqui no README.
-
----
-
-## Estrutura do projeto (e por que está organizado assim)
-
+```csv
+y_real,y_previsto,y_proba
+0,0,0.08
+1,1,0.91
+1,0,0.42
 ```
+
+`y_proba` é opcional e representa a probabilidade da classe positiva escolhida.
+
+Regressão:
+
+```csv
+y_real,y_previsto
+105000,98500
+87000,91230
+```
+
+## Estrutura
+
+```text
 ml-metrics-calculator/
-├── app.py              # A TELA (Streamlit). Só monta a interface.
-├── metrics_core.py      # As CONTAS. Funções puras, sem interface.
-├── explicacoes.py        # Os TEXTOS explicativos e alertas.
-├── gerar_exemplos.py     # Script para gerar os CSVs de sample_data/
-├── tests/
-│   └── test_metrics.py   # Testes automáticos das funções de metrics_core.py
-├── sample_data/          # CSVs de exemplo prontos para testar
-└── requirements.txt
+├── app.py
+├── assets/
+│   └── preview.png
+├── docs/
+│   ├── como_explicar_o_projeto.md
+│   ├── linkedin.md
+│   └── metodologia.md
+├── sample_data/
+├── scripts/
+│   └── gerar_visualizacoes.py
+├── src/
+│   ├── charts.py
+│   ├── examples.py
+│   ├── metrics.py
+│   └── validation.py
+└── tests/
 ```
 
-A separação entre "as contas" (`metrics_core.py`) e "a tela" (`app.py`)
-é de propósito: assim é possível testar se a matemática está certa
-sem precisar abrir o navegador, e é isso que o arquivo de testes faz.
-
----
-
-## Rodando os testes automáticos
+## Executar com Python 3.14
 
 ```bash
-pip install -r requirements-dev.txt   # inclui o pytest
-pytest -v
+git clone https://github.com/bruno-dsn/ml-metrics-calculator.git
+cd ml-metrics-calculator
+
+python3.14 -m venv .venv
+source .venv/bin/activate
+
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+streamlit run app.py
 ```
 
-Isso confere, por exemplo, que quando o modelo acerta tudo a acurácia
-dá 100%, que a matriz de confusão tem o formato certo, e que um
-"modelo" que chuta um valor absurdo em regressão gera R² negativo.
-Se algum dia você alterar `metrics_core.py` e quebrar alguma conta, os
-testes avisam antes de você descobrir isso com um número errado na tela.
+No Windows, ative o ambiente com `.venv\Scripts\activate`.
 
----
+## Testes
 
-## Roadmap
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
+```
 
-- [x] Classificação binária (acurácia, precisão, recall, F1, matriz de confusão)
-- [x] Curva ROC e Precision-Recall para classificação binária
-- [x] Classificação multiclasse
-- [x] Regressão (MAE, RMSE, R²)
-- [x] Alerta automático de dataset desbalanceado
-- [x] Veredito automático ("Model Assessment") com recomendação de uso
-- [x] Testes automatizados (pytest)
-- [ ] Exportação do relatório em PDF ou Markdown
-- [ ] Aceitar múltiplos modelos no mesmo CSV para comparar lado a lado
-- [ ] Métricas por classe individual na multiclasse (além da média macro)
+Os testes cobrem métricas, classe positiva textual, limiar, probabilidades, multiclasse, regressão, validação dos dados e abertura do aplicativo.
+
+## Limitações
+
+O laboratório recebe resultados já produzidos por um modelo. Ele não verifica vazamento de dados, estratégia de validação, estabilidade temporal, viés, latência ou monitoramento em produção.
+
+## Autor
+
+**Bruno Nunes**
+
+Estudante da Pós-Tech AI Scientist na FIAP, com foco em Ciência de Dados, Machine Learning e produtos orientados a dados.
+
+[GitHub](https://github.com/bruno-dsn) | [LinkedIn](https://www.linkedin.com/in/bruno-dsnunes/)
+
+## Licença
+
+Distribuído sob a licença MIT.
