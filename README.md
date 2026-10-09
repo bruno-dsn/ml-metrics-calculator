@@ -1,19 +1,20 @@
-[![Python checks](https://github.com/bruno-dsn/ml-metrics-calculator/actions/workflows/tests.yml/badge.svg)](https://github.com/bruno-dsn/ml-metrics-calculator/actions/workflows/tests.yml)
+# Laboratório de Métricas de ML
 
-# Laboratório de Métricas de Machine Learning
+![Laboratório de Métricas de ML](assets/portfolio-cover.svg)
 
-![Python](https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-aplicação-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-métricas-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
-![Altair](https://img.shields.io/badge/Altair-gráficos-1F77B4?style=for-the-badge)
-![Tests](https://img.shields.io/badge/testes-pytest-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
-![License](https://img.shields.io/badge/licença-MIT-0F766E?style=for-the-badge)
+Explore classificação binária, multiclasse e regressão com exemplos ou um CSV próprio. Compare métricas, investigue erros e observe como o limiar altera as decisões.
 
-[Acessar aplicação](https://ml-metrics-calculator.streamlit.app/)
+[Como executar](#como-executar) · [Dados e método](docs/metodologia.md) · [Testes](tests/) · [Histórico](https://github.com/bruno-dsn/ml-metrics-calculator/commits/main)
 
-Aplicação educacional para interpretar métricas de classificação e regressão com contexto. O laboratório permite escolher a classe positiva, ajustar o limiar de decisão e observar como cada escolha altera os erros do modelo.
+[![Verificações Python](https://github.com/bruno-dsn/ml-metrics-calculator/actions/workflows/tests.yml/badge.svg)](https://github.com/bruno-dsn/ml-metrics-calculator/actions/workflows/tests.yml) · [Licença MIT](LICENSE)
 
-![Visão do laboratório](assets/preview.png)
+## Veja a aplicação
+
+![Captura real da interface revisada](assets/interface-desktop.png)
+
+Captura da aplicação executada localmente com os dados de demonstração. A fonte dos dados, os filtros e as hipóteses permanecem visíveis no painel.
+
+**Primeira exploração:** Altere o limiar do exemplo binário; compare precisão e recall; depois abra multiclasse e regressão.
 
 ## Problema
 
