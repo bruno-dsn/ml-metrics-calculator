@@ -134,7 +134,7 @@ O laboratório recebe resultados já produzidos por um modelo. Ele não verifica
 
 **Bruno Nunes**
 
-Estudante da Pós-Tech AI Scientist na FIAP, com foco em Ciência de Dados, Machine Learning e produtos orientados a dados.
+Graduando em Inteligência Artificial e Machine Learning pela FAM, com conclusão prevista em dezembro de 2028. Formação profissional em Análise de Dados pela EBAC e graduação em Redes de Computadores concluídas. Em busca de estágio em Ciência de Dados.
 
 [GitHub](https://github.com/bruno-dsn) | [LinkedIn](https://www.linkedin.com/in/bruno-dsnunes/)
 
